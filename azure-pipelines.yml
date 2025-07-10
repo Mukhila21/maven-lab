@@ -2,29 +2,19 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default
 
 steps:
 - task: Maven@4
   inputs:
-    mavenPomFile: 'pom.xml'  # Update to actual location of your pom.xml
-    goals: 'clean deploy'
+    mavenPomFile: 'maven-examples/maven-example/pom.xml'
+    goals: 'clean install'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: true
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'env | sort'
-
-- task: JFrogPublishBuildInfo@1
-  inputs:
-    artifactoryConnection: 'mk-jfrog-artifactory-hts'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
+- script: echo "✅ Build completed on Mukhila's self-hosted agent"
