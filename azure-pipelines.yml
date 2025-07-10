@@ -3,6 +3,7 @@ trigger:
 
 pool:
   name: Default
+  demands: []
 
 steps:
 - task: Maven@4
@@ -17,4 +18,4 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
-- script: echo "✅ Build completed on Mukhila's self-hosted agent"
+- script: echo "✅ Build completed on self-hosted agent"
